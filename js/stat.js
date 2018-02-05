@@ -60,9 +60,8 @@ var getMaxElement = function (arr) {
   }
   return maxElement;
 };
-var getRandomColor = function (r, g, b, a) {
-
-  return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
+var getRandomColor = function () {
+  return 'rgba(0, 0, 255,' + Math.random() + ' )';
 };
 window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
@@ -75,9 +74,9 @@ window.renderStatistics = function (ctx, names, times) {
   for (var i = 0; i < names.length; i++) {
     ctx.fillText(Math.round(times[i]), CLOUD_X + COLUMN_WIDTH + ((COLUMN_WIDTH + GAP_COLUMN) * i), INDENTED_TXT_TIME_Y + (HISTOGRAM_HEIGHT - Math.round((HISTOGRAM_HEIGHT * Math.round(times[i])) / maxTime))); // время
     if (names[i] === 'Вы') {
-      ctx.fillStyle = getRandomColor(255, 0, 0, 1);
+      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
-      ctx.fillStyle = getRandomColor(0, 0, 255, Math.random());
+      ctx.fillStyle = getRandomColor();
     }
     ctx.fillRect(CLOUD_X + GAP_X + ((COLUMN_WIDTH + GAP_COLUMN) * i), BOTTOM_HISTOGRAM + (HISTOGRAM_HEIGHT - Math.round((HISTOGRAM_HEIGHT * Math.round(times[i])) / maxTime)), COLUMN_WIDTH, Math.round((HISTOGRAM_HEIGHT * Math.round(times[i])) / maxTime)); // полоса
     ctx.fillStyle = '#000';
