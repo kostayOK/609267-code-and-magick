@@ -22,26 +22,27 @@ var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161
 var EYE_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var getRandomElement = function (arr) {
   /** массив с обьектом имя и цвет */
-  return Math.floor(Math.random() * arr);
+  return Math.floor(Math.random() * arr.length);
 };
-/** массив с обьектом имя и цвет */
-var wizards = [];
 var createRandomWizard = function (arrName, arrSurname, arrColor, arrEyes) {
   var obj = {
-    name: arrName[getRandomElement(arrName.length)],
-    surName: arrSurname[getRandomElement(arrSurname.length)],
-    color: arrColor[getRandomElement(arrColor.length)],
-    eyes: arrEyes[getRandomElement(arrEyes.length)]
+    name: arrName[getRandomElement(arrName)],
+    surName: arrSurname[getRandomElement(arrSurname)],
+    color: arrColor[getRandomElement(arrColor)],
+    eyes: arrEyes[getRandomElement(arrEyes)]
   };
   return obj;
 };
-var generateData = function (arr) {
+var generateData = function () {
   /** вызавет четыре раза и вернет заполненый массив */
+  var arr = [];
   for (var i = 0; i < 4; i++) {
     arr.push(createRandomWizard(WIZARD_NAMES, SURNAMES, COAT_COLORS, EYE_COLORS));
   }
+  return arr;
 };
-generateData(wizards);
+/** массив с обьектом имя и цвет */
+var wizards = generateData();
 for (var i = 0; i < wizards.length; i++) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
   wizardElement.querySelector('.setup-similar-label').textContent = wizards[i].name + '\n' + wizards[i].surName;
