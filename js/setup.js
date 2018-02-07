@@ -15,42 +15,33 @@ var fragment = document.createDocumentFragment();
 /** масив имен */
 var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 /** фамилии */
-var WIZARD_SURNAME = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
+var SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 /** случайный цвет мантии на выбор из следующих: */
-var coatColor = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
+var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 /** случайный цвет глаз персонажа на выбор из следующих:: */
-var eyesColor = ['black', 'red', 'blue', 'yellow', 'green'];
-var getNumber = function (num) {
+var EYE_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
+var getRandomElement = function (arr) {
   /** массив с обьектом имя и цвет */
-  return Math.floor(Math.random() * num);
+  return Math.floor(Math.random() * arr);
 };
 /** массив с обьектом имя и цвет */
-var wizards = [
-  {
-    name: WIZARD_NAMES[getNumber(WIZARD_NAMES.length)],
-    surName: WIZARD_SURNAME[getNumber(WIZARD_SURNAME.length)],
-    color: coatColor[getNumber(coatColor.length)],
-    eyes: eyesColor[getNumber(eyesColor.length)]
-  },
-  {
-    name: WIZARD_NAMES[getNumber(WIZARD_NAMES.length)],
-    surName: WIZARD_SURNAME[getNumber(WIZARD_SURNAME.length)],
-    color: coatColor[getNumber(coatColor.length)],
-    eyes: eyesColor[getNumber(eyesColor.length)]
-  },
-  {
-    name: WIZARD_NAMES[getNumber(WIZARD_NAMES.length)],
-    surName: WIZARD_SURNAME[getNumber(WIZARD_SURNAME.length)],
-    color: coatColor[getNumber(coatColor.length)],
-    eyes: eyesColor[getNumber(eyesColor.length)]
-  },
-  {
-    name: WIZARD_NAMES[getNumber(WIZARD_NAMES.length)],
-    surName: WIZARD_SURNAME[getNumber(WIZARD_SURNAME.length)],
-    color: coatColor[getNumber(coatColor.length)],
-    eyes: eyesColor[getNumber(eyesColor.length)]
+var wizards = [];
+var createRandomWizard = function (arrName, arrSurname, arrColor, arrEyes) {
+  var obj = {
+    name: arrName[getRandomElement(arrName.length)],
+    surName: arrSurname[getRandomElement(arrSurname.length)],
+    color: arrColor[getRandomElement(arrColor.length)],
+    eyes: arrEyes[getRandomElement(arrEyes.length)]
+  };
+  return obj;
+};
+var generateData = function (arr) {
+  /** вызавет четыре раза и вернет заполненый массив */
+  for (var i = 0; i < 4; i++) {
+    arr.push(createRandomWizard(WIZARD_NAMES, SURNAMES, COAT_COLORS, EYE_COLORS));
   }
-];
+};
+generateData(wizards);
 for (var i = 0; i < wizards.length; i++) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
   wizardElement.querySelector('.setup-similar-label').textContent = wizards[i].name + '\n' + wizards[i].surName;
