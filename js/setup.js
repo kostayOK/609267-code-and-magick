@@ -22,14 +22,14 @@ var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161
 var EYE_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var getRandomElement = function (arr) {
   /** массив с обьектом имя и цвет */
-  return Math.floor(Math.random() * arr.length);
+  return arr[Math.floor(Math.random() * arr.length)];
 };
 var createRandomWizard = function (arrName, arrSurname, arrColor, arrEyes) {
   var obj = {
-    name: arrName[getRandomElement(arrName)],
-    surName: arrSurname[getRandomElement(arrSurname)],
-    color: arrColor[getRandomElement(arrColor)],
-    eyes: arrEyes[getRandomElement(arrEyes)]
+    name: getRandomElement(arrName),
+    surName: getRandomElement(arrSurname),
+    color: getRandomElement(arrColor),
+    eyes: getRandomElement(arrEyes)
   };
   return obj;
 };
