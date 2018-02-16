@@ -134,31 +134,30 @@ var arrsColorCoat = [
 var arrsColorEyes = ['black', 'red', 'blue', 'yellow', 'green'];
 /** цвета фаерболов */
 var arrsColorFirebal = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
-/** increase - увеличивать increase */
-var increase = 1;
-var arrsColorRandom = function (arr, wizard) {
-  // console.log(wizard.tagName);
-  if (wizard.tagName === 'use') {
-    wizard.style.fill = arr[increase];
-  } else if (wizard.tagName === 'DIV') {
-    wizard.style.backgroundColor = arr[increase];
+/** lastColorIndex - увеличивать lastColorIndex */
+var lastColorIndex = 1;
+wizardCoat.addEventListener('click', function () {
+  /** по клику меняю цвет мантии */
+  wizardCoat.style.fill = arrsColorCoat[lastColorIndex];
+  lastColorIndex++;
+  if (lastColorIndex >= arrsColorCoat.length) {
+    lastColorIndex = 0;
   }
-  increase++;
-  if (increase >= arr.length) {
-    increase = 0;
+});
+wizardEyes.addEventListener('click', function () {
+  /** по клику меняю цвет глаз */
+  wizardEyes.style.fill = arrsColorEyes[lastColorIndex];
+  lastColorIndex++;
+  if (lastColorIndex >= arrsColorEyes.length) {
+    lastColorIndex = 0;
   }
-};
-var colorRandom = function (ev) {
-  /** по клику меняю цвет мантии или глаз */
-  if (ev.target.classList[0] === 'wizard-coat') {
-    arrsColorRandom(arrsColorCoat, wizardCoat);
-  } else if (ev.target.classList[0] === 'wizard-eyes') {
-    arrsColorRandom(arrsColorEyes, wizardEyes);
-  }
-};
-/** по клику запускаю обработчик */
-setupWizard.addEventListener('click', colorRandom);
+});
 /** изменение цвета фаербола */
 setupFireballWrap.addEventListener('click', function () {
-  arrsColorRandom(arrsColorFirebal, setupFireball);
+  setupFireball.style.backgroundColor = arrsColorFirebal[lastColorIndex];
+  lastColorIndex++;
+  if (lastColorIndex >= arrsColorFirebal.length) {
+    lastColorIndex = 0;
+  }
 });
+
