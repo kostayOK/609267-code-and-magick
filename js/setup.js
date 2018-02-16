@@ -1,7 +1,5 @@
 'use strict';
-var userDialog = document.querySelector('.setup');
-/** hidden - скрытый */
-userDialog.classList.remove('hidden');
+var setup = document.querySelector('.setup');
 /** setup-similar - настройка похожие */
 document.querySelector('.setup-similar').classList.remove('hidden');
 /** setup-similar-list - настройка аналогичный список */
@@ -52,4 +50,116 @@ for (var i = 0; i < wizards.length; i++) {
 
 }
 similarListElement.appendChild(fragment);
+/** обработка событий */
+/** открытия окна */
+var setupOpen = document.querySelector('.setup-open');
+/** закрытие окна */
+var setupClose = setup.querySelector('.setup-close');
+var ENTER_KEYCODE = 13;
+var ESC_KEYCODE = 27;
+/** форма */
+var setupWizardForm = document.querySelector('.setup-wizard-form');
+/** кнопка формы */
+var setupWizardFormButton = setupWizardForm.querySelector('.setup-footer button');
+/** отправка формы */
+var setupWizardFormSubmit = function () {
+  /** отправка формы */
+  setupWizardForm.submit();
+};
+var onPopupEscPress = function (ev) {
+  /** удаление обработчика если на прямую устоновить в обработчик
+   * openPopup то при закрытеи окна обработчик
+   *  document.addEventListener('keydown' function(){}) продолжает работать */
+  if (ev.keyCode === ESC_KEYCODE) {
+    if (ev.target.tagName === 'INPUT') {
+      ev.stopPropagation();
+    } else {
+      closePopup();
+    }
+  } else if (ev.keyCode === ENTER_KEYCODE) {
+    if (ev.target.tagName === 'BUTTON') {
+      setupWizardFormSubmit();
+    }
+  }
+};
+var openPopup = function () {
+  /** hidden - скрытый */
+  setup.classList.remove('hidden');
+  /** когда показалось окно заводим событие на документе ! событие клавиатуры */
+  /** открыл слушателя на ESC */
+  document.addEventListener('keydown', onPopupEscPress);
+  /** при нажатии на кнопку отправляет форму и закрывает окно */
+  setupWizardFormButton.addEventListener('click', setupWizardFormSubmit);
+};
+var closePopup = function () {
+  setup.classList.add('hidden');
+  /** удалил слушателя */
+  document.removeEventListener('keydown', onPopupEscPress);
+};
+/** открытие окна по клику на элимент */
+setupOpen.addEventListener('click', function () {
+  openPopup();
+});
+/** если находясь на элименте в фокусе нажать enter то покозать окно */
+setupOpen.addEventListener('keydown', function (ev) {
+  if (ev.keyCode === ENTER_KEYCODE) {
+    openPopup();
+  }
+});
+/** закрытия окна при клике на элимент */
+setupClose.addEventListener('click', function () {
+  closePopup();
+});
+/** закрытия окна в фокусе на элименте при нажатее на enter закрыть */
+setupClose.addEventListener('keydown', function (ev) {
+  if (ev.keyCode === ENTER_KEYCODE) {
+    closePopup();
+  }
+});
+/** Изменение цвета мантии персонажа по нажатию. */
+var setupWizard = document.querySelector('.setup-wizard');
+var wizardCoat = setupWizard.querySelector('.wizard-coat');
+var wizardEyes = setupWizard.querySelector('.wizard-eyes');
+var setupFireballWrap = document.querySelector('.setup-fireball-wrap');
+var setupFireball = setupFireballWrap.querySelector('.setup-fireball');
+/** цвета мантии */
+var coatColors = [
+  'rgb(101, 137, 164)',
+  'rgb(241, 43, 107)',
+  'rgb(146, 100, 161)',
+  'rgb(56, 159, 117)',
+  'rgb(215, 210, 55)',
+  'rgb(0, 0, 0)'];
+/** цвета глаз */
+var eyeColors = ['black', 'red', 'blue', 'yellow', 'green'];
+/** цвета фаерболов */
+var fireballColors = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
+/** lastColorIndex - увеличивать lastColorIndex */
+var lastColorIndexCoat = 1;
+wizardCoat.addEventListener('click', function () {
+  /** по клику меняю цвет мантии */
+  wizardCoat.style.fill = coatColors[lastColorIndexCoat];
+  lastColorIndexCoat++;
+  if (lastColorIndexCoat >= coatColors.length) {
+    lastColorIndexCoat = 0;
+  }
+});
+var lastColorIndexEyes = 1;
+wizardEyes.addEventListener('click', function () {
+  /** по клику меняю цвет глаз */
+  wizardEyes.style.fill = eyeColors[lastColorIndexEyes];
+  lastColorIndexEyes++;
+  if (lastColorIndexEyes >= eyeColors.length) {
+    lastColorIndexEyes = 0;
+  }
+});
+var lastColorIndexFireball = 1;
+/** изменение цвета фаербола */
+setupFireballWrap.addEventListener('click', function () {
+  setupFireball.style.backgroundColor = fireballColors[lastColorIndexFireball];
+  lastColorIndexFireball++;
+  if (lastColorIndexFireball >= fireballColors.length) {
+    lastColorIndexFireball = 0;
+  }
+});
 
