@@ -123,7 +123,7 @@ var wizardEyes = setupWizard.querySelector('.wizard-eyes');
 var setupFireballWrap = document.querySelector('.setup-fireball-wrap');
 var setupFireball = setupFireballWrap.querySelector('.setup-fireball');
 /** цвета мантии */
-var arrsColorCoat = [
+var coatColors = [
   'rgb(101, 137, 164)',
   'rgb(241, 43, 107)',
   'rgb(146, 100, 161)',
@@ -131,34 +131,34 @@ var arrsColorCoat = [
   'rgb(215, 210, 55)',
   'rgb(0, 0, 0)'];
 /** цвета глаз */
-var arrsColorEyes = ['black', 'red', 'blue', 'yellow', 'green'];
+var eyeColors = ['black', 'red', 'blue', 'yellow', 'green'];
 /** цвета фаерболов */
-var arrsColorFirebal = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
+var fireballColors = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 /** lastColorIndex - увеличивать lastColorIndex */
 var lastColorIndexCoat = 1;
 wizardCoat.addEventListener('click', function () {
   /** по клику меняю цвет мантии */
-  wizardCoat.style.fill = arrsColorCoat[lastColorIndexCoat];
+  wizardCoat.style.fill = coatColors[lastColorIndexCoat];
   lastColorIndexCoat++;
-  if (lastColorIndexCoat >= arrsColorCoat.length) {
+  if (lastColorIndexCoat >= coatColors.length) {
     lastColorIndexCoat = 0;
   }
 });
 var lastColorIndexEyes = 1;
 wizardEyes.addEventListener('click', function () {
   /** по клику меняю цвет глаз */
-  wizardEyes.style.fill = arrsColorEyes[lastColorIndexEyes];
+  wizardEyes.style.fill = eyeColors[lastColorIndexEyes];
   lastColorIndexEyes++;
-  if (lastColorIndexEyes >= arrsColorEyes.length) {
+  if (lastColorIndexEyes >= eyeColors.length) {
     lastColorIndexEyes = 0;
   }
 });
 var lastColorIndexFireball = 1;
 /** изменение цвета фаербола */
 setupFireballWrap.addEventListener('click', function () {
-  setupFireball.style.backgroundColor = arrsColorFirebal[lastColorIndexFireball];
+  setupFireball.style.backgroundColor = fireballColors[lastColorIndexFireball];
   lastColorIndexFireball++;
-  if (lastColorIndexFireball >= arrsColorFirebal.length) {
+  if (lastColorIndexFireball >= fireballColors.length) {
     lastColorIndexFireball = 0;
   }
 });
