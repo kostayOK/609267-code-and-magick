@@ -135,29 +135,31 @@ var arrsColorEyes = ['black', 'red', 'blue', 'yellow', 'green'];
 /** цвета фаерболов */
 var arrsColorFirebal = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 /** lastColorIndex - увеличивать lastColorIndex */
-var lastColorIndex = 1;
+var lastColorIndexCoat = 1;
 wizardCoat.addEventListener('click', function () {
   /** по клику меняю цвет мантии */
-  wizardCoat.style.fill = arrsColorCoat[lastColorIndex];
-  lastColorIndex++;
-  if (lastColorIndex >= arrsColorCoat.length) {
-    lastColorIndex = 0;
+  wizardCoat.style.fill = arrsColorCoat[lastColorIndexCoat];
+  lastColorIndexCoat++;
+  if (lastColorIndexCoat >= arrsColorCoat.length) {
+    lastColorIndexCoat = 0;
   }
 });
+var lastColorIndexEyes = 1;
 wizardEyes.addEventListener('click', function () {
   /** по клику меняю цвет глаз */
-  wizardEyes.style.fill = arrsColorEyes[lastColorIndex];
-  lastColorIndex++;
-  if (lastColorIndex >= arrsColorEyes.length) {
-    lastColorIndex = 0;
+  wizardEyes.style.fill = arrsColorEyes[lastColorIndexEyes];
+  lastColorIndexEyes++;
+  if (lastColorIndexEyes >= arrsColorEyes.length) {
+    lastColorIndexEyes = 0;
   }
 });
+var lastColorIndexFireball = 1;
 /** изменение цвета фаербола */
 setupFireballWrap.addEventListener('click', function () {
-  setupFireball.style.backgroundColor = arrsColorFirebal[lastColorIndex];
-  lastColorIndex++;
-  if (lastColorIndex >= arrsColorFirebal.length) {
-    lastColorIndex = 0;
+  setupFireball.style.backgroundColor = arrsColorFirebal[lastColorIndexFireball];
+  lastColorIndexFireball++;
+  if (lastColorIndexFireball >= arrsColorFirebal.length) {
+    lastColorIndexFireball = 0;
   }
 });
 
